@@ -50,7 +50,7 @@ public class MD5Helper {
     StringBuilder sb = new StringBuilder();
 
     for (int i = 0; i < bytes.length; ++i) {
-      sb.append(String.format("%02X", bytes[i]));
+      sb.append(String.format("%02x", bytes[i]));
     }
 
     return sb.toString();
