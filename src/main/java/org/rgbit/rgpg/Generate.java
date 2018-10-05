@@ -25,7 +25,8 @@ public class Generate {
         sb.append(md5K2.charAt(i));
       }
     }
-    return Essential.FIRST + sb.substring(1, Math.min(length, sb.length()));
+
+    return Essential.FIRST + trans.translate(sb.substring(1, Math.min(length, sb.length())));
   }
 
   /**
