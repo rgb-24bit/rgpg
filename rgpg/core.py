@@ -1,8 +1,13 @@
 # -*- coding: utf-8 -*-
 
+import argparse
 import json
+import sys
 
 from hashlib import md5
+from urllib.parse import urlparse
+
+from rgpg.__version__ import __version__, __description__
 
 
 class Essential(object):
@@ -59,3 +64,63 @@ def generate(key, essential, length=16):
 
     table = str.maketrans(essential.TRANS_SRC, essential.TRANS_DST)
     return essential.FIRST + password[1: min(length, 32)].translate(table)
+
+
+def argparser():
+    """Command line arguments parsing."""
+    parser = argparse.ArgumentParser(prog='rgpg', description=__description__)
+
+    parser.add_argument('-v', '--version',
+                        action='version', version='%(prog)s ' + __version__)
+
+    parser.add_argument('-l', '--length',
+                        action='store', dest='length', type=int, default=16,
+                        help='Specify the length of the password')
+
+    parser.add_argument('-f', '--file',
+                        action='store', dest='file', type=str, default=None,
+                        help='Specify configuration file')
+
+    group = parser.add_mutually_exclusive_group()
+
+    group.add_argument('-k', '--key',
+                        action='store', dest='key', type=str, default=None,
+                        help='Generate a password based on the specified key')
+
+    group.add_argument('-u', '--url',
+                        action='store', dest='url', type=str, default=None,
+                        help='Generate a password based on the specified url')
+
+    group.add_argument('-c', '--create',
+                        action='store', dest='create', type=str, default=None,
+                        help='Create a default configuration profile')
+
+    return parser.parse_args()
+
+def cli():
+    essential = Essential()
+    arguments = argparser()
+
+    if arguments.create:
+        essential.makefile(arguments.create)
+        return None
+
+    if arguments.file:
+        if not essential.loadfile(arguments.file):
+            print('error: Wrong configuration file format')
+            return None
+
+    if arguments.url:
+        hostname = urlparse(arguments.url).hostname
+        if hostname is None:
+            print('error: Unsatisfactory url argument')
+        else:
+            print(generate(hostname, essential, arguments.length))
+        return None
+
+    if arguments.key:
+        print(generate(arguments.key, essential, arguments.length))
+        return None
+
+    if len(sys.argv) > 1:
+        print('error: Need to specify a key or url')
