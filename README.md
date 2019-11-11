@@ -1,33 +1,32 @@
 # rgpg
 
-> Generate the password with the necessary information and the specified input.
+> Password generator to generate a password based on the specified pattern.
 
 ## Usage
 
 ```
-usage: rgpg [-h] [-v] [-l LENGTH] [-f FILE] [-k KEY | -u URL | -c CREATE]
+usage: rgpg [-h] [-v] -p PATTERN -k KEY
 
-Generate the password with the necessary informationand the specified input.
+Password generator to generate a password basedon the specified pattern.
 
 optional arguments:
   -h, --help            show this help message and exit
   -v, --version         show program's version number and exit
-  -l LENGTH, --length LENGTH
-                        Specify the length of the password
-  -f FILE, --file FILE  Specify configuration file
-  -k KEY, --key KEY     Generate a password based on the specified key
-  -u URL, --url URL     Generate a password based on the specified url
-  -c CREATE, --create CREATE
-                        Create a default configuration profile
+  -p PATTERN, --pattern PATTERN
+                        The mode used to generate the password.
+  -k KEY, --key KEY     The base key used to generate the password.
 ```
 
-You can generate a default configuration file with the `-c` option and specify the configuration file that the password generator needs to use with the option `-f`.
+The syntax of the pattern is:
+1. Specify the number of special, uppercase, lowercase, and numeric characters by S, U, L, D and integers.
+2. Characters are not case sensitive.
+3. Characters can be repeated.
 
-If you do not specify a profile, the password generator will generate your password using the `default` configuration.
-
-The option `-u` will intercept the host part of the specified url for password generation.
-
-The option `-k` can be used to specify any string.
+Example:
+```
+$ rgpg -k key -p s1u2l3d4l3u2s1
+4V_4en@SGnv3Yff9
+```
 
 ## Install
 
@@ -42,11 +41,6 @@ $ python setup.py install
 ## History
 
 See [releases](https://github.com/rgb-24bit/rgpg/releases) page.
-
-## TODO
-
-- [ ] Specify individual configuration items through command line options
-- [ ] Read file batch generation password
 
 ## LICENSE
 

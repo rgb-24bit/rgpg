@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 
 """
-Generate the password with the necessary information and the specified input
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Password generator to generate a password based on the specified pattern.
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-:copyright: (c) 2018 by rgb-24bit.
+:copyright: (c) 2018 - 2019 by rgb-24bit.
 :license: MIT, see LICENSE for more details.
 """
 

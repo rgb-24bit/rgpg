@@ -8,7 +8,7 @@ from shutil import rmtree
 from setuptools import find_packages, setup, Command
 
 NAME = 'rgpg'
-DESCRIPTION = 'Generate the password with the necessary informationand the specified input.'
+DESCRIPTION = 'Password generator to generate a password based on the specified pattern.'
 URL = 'https://github.com/rgb-24bit/rgpg'
 EMAIL = 'rgb-24bit@foxmail.com'
 AUTHOR = 'rgb-24bit'
@@ -75,7 +75,6 @@ setup(
         'License :: OSI Approved :: MIT License'
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.6',
     ],
     cmdclass={
         'realese': RealeseCommand,
